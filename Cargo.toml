@@ -4,3 +4,8 @@ version = "0.1.0"
 authors = ["Konstantin Terziev <kd.terziev@gmail.com>"]
 
 [dependencies]
+gtk = "^0"
+cairo-rs = "^0"
+
+[features]
+gtk_3_6 = ["gtk/v3_6"]
