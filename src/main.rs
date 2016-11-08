@@ -2,8 +2,8 @@ extern crate gtk;
 extern crate cairo;
 
 use gtk::prelude::*;
-use gtk::{Window, WindowType, WindowPosition, DrawingArea};
-use visualiser::set_draw_callback;
+use gtk::{Window, WindowType, WindowPosition};
+use visualiser::Visualiser;
 
 mod visualiser;
 mod pen;
@@ -23,9 +23,9 @@ fn main() {
         Inhibit(false)
     });
 
-    let drawing_area = &DrawingArea::new();
-    set_draw_callback(drawing_area);
-    window.add(drawing_area);
+    let visu = Visualiser::new();
+    visu.set_draw_callback();
+    window.add(visu.get_drawing_area());
 
     window.show_all();
     gtk::main();
