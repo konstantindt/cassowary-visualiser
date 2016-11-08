@@ -26,7 +26,7 @@ impl PenStream {
     }
 }
 
-pub struct Rectangle {
+struct Rectangle {
     x_pos: f64,
     y_pos: f64,
     width: f64,

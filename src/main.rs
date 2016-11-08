@@ -4,6 +4,7 @@ extern crate cairo;
 use gtk::prelude::*;
 use gtk::{Window, WindowType, WindowPosition};
 use visualiser::Visualiser;
+use pen::PenStream;
 
 mod visualiser;
 mod pen;
@@ -23,8 +24,14 @@ fn main() {
         Inhibit(false)
     });
 
+    let mut pen = PenStream::new();
+    pen.add_rec_to_draw(30.0, 30.0, 30.0, 40.0);
+    pen.add_rec_to_draw(90.0, 90.0, 30.0, 40.0);
+    pen.add_rec_to_draw(150.0, 150.0, 30.0, 40.0);
+    pen.add_rec_to_draw(210.0, 210.0, 30.0, 40.0);
+
     let visu = Visualiser::new();
-    visu.set_draw_callback();
+    visu.set_draw_callback(pen);
     window.add(visu.get_drawing_area());
 
     window.show_all();
