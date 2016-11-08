@@ -3,9 +3,9 @@ extern crate cairo;
 
 use gtk::prelude::*;
 use gtk::{Window, WindowType, WindowPosition, DrawingArea};
-use draw_events::set_draw_callback;
+use visualiser::set_draw_callback;
 
-mod draw_events;
+mod visualiser;
 mod pen;
 
 fn main() {
