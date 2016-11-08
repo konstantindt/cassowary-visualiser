@@ -6,6 +6,7 @@ use gtk::{Window, WindowType, WindowPosition, DrawingArea};
 use draw_events::set_draw_callback;
 
 mod draw_events;
+mod pen;
 
 fn main() {
     if gtk::init().is_err() {
