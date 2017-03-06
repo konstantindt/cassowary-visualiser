@@ -1,6 +1,6 @@
-use ::gtk::prelude::*;
-use ::gtk::DrawingArea;
-use ::cairo::Context;
+use gtk::prelude::*;
+use gtk::DrawingArea;
+use cairo::Context;
 use pen::PenStream;
 
 pub struct Visualiser {
