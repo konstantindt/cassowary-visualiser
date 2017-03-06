@@ -1,4 +1,4 @@
-use ::cairo::Context;
+use cairo::Context;
 
 pub struct PenStream {
     recs_to_draw: Vec<Rectangle>,
