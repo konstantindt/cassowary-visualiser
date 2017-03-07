@@ -5,6 +5,7 @@ authors = ["Konstantin Terziev <kd.terziev@gmail.com>"]
 
 [dependencies]
 gtk = "^0"
+gdk = "^0"
 cairo-rs = "^0"
 
 [features]
