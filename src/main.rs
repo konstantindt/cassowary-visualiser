@@ -1,6 +1,8 @@
 extern crate gtk;
+extern crate gdk;
 extern crate cairo;
 
+use std::sync::{Arc, Mutex};
 use gtk::prelude::*;
 use gtk::{Window, WindowType, WindowPosition};
 use visualiser::Visualiser;
@@ -24,15 +26,18 @@ fn main() {
         Inhibit(false)
     });
 
-    let mut pen = PenStream::new();
-    pen.add_rec_to_draw(30.0, 30.0, 30.0, 40.0);
-    pen.add_rec_to_draw(90.0, 90.0, 30.0, 40.0);
-    pen.add_rec_to_draw(150.0, 150.0, 30.0, 40.0);
-    pen.add_rec_to_draw(210.0, 210.0, 30.0, 40.0);
-
+    let shared_pen = Arc::new(Mutex::new(PenStream::new()));
+    {
+        let mut pen = shared_pen.lock().unwrap();
+        pen.add_rec_to_draw(30.0, 30.0, 30.0, 40.0);
+        pen.add_rec_to_draw(90.0, 90.0, 30.0, 40.0);
+        pen.add_rec_to_draw(150.0, 150.0, 30.0, 40.0);
+        pen.add_rec_to_draw(210.0, 210.0, 30.0, 40.0);
+    }
     let visu = Visualiser::new();
-    visu.set_draw_callback(pen);
-    window.add(visu.get_drawing_area());
+    visu.set_draw_event(shared_pen.clone());
+    visu.set_mouse_move_event(shared_pen.clone());
+    window.add(visu.drawing_area());
 
     window.show_all();
     gtk::main();
