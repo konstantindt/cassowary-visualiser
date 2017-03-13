@@ -7,6 +7,7 @@ authors = ["Konstantin Terziev <kd.terziev@gmail.com>"]
 gtk = "^0"
 gdk = "^0"
 cairo-rs = "^0"
+cassowary = { git = "https://github.com/MrKonstantinT/rust-cassowary/" }
 
 [features]
 gtk_3_6 = ["gtk/v3_6"]
