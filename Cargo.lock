@@ -58,7 +58,7 @@ dependencies = [
 [[package]]
 name = "cassowary"
 version = "0.1.0"
-source = "git+https://github.com/MrKonstantinT/rust-cassowary/#6f022326d12d45f2bd65a27bfb390a222df3932b"
+source = "git+https://github.com/MrKonstantinT/rust-cassowary/#8057609397776384610bc478ebc8123226194a66"
 
 [[package]]
 name = "gdk"
