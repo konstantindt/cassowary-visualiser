@@ -5,6 +5,7 @@ dependencies = [
  "cairo-rs 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "cassowary 0.1.0 (git+https://github.com/MrKonstantinT/rust-cassowary/)",
  "gdk 0.5.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "getopts 0.2.14 (registry+https://github.com/rust-lang/crates.io-index)",
  "gtk 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
@@ -114,6 +115,11 @@ dependencies = [
  "pango-sys 0.3.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "pkg-config 0.3.8 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
+
+[[package]]
+name = "getopts"
+version = "0.2.14"
+source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "gio"
@@ -256,6 +262,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 "checksum gdk-pixbuf 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)" = "5c4fd94e8cb37a8e25f84dd18b574a5d54823da3e8a9fe9b0adc154c77ca5c98"
 "checksum gdk-pixbuf-sys 0.3.1 (registry+https://github.com/rust-lang/crates.io-index)" = "4db256fec7cfbb3ec00e45096a67b676dc255d5cdeb10770b8f0137932ec0944"
 "checksum gdk-sys 0.3.1 (registry+https://github.com/rust-lang/crates.io-index)" = "dce70d89e26b1b97a9ea580ef1f9d08a75b8623627a8452821c9357fc57fafbe"
+"checksum getopts 0.2.14 (registry+https://github.com/rust-lang/crates.io-index)" = "d9047cfbd08a437050b363d35ef160452c5fe8ea5187ae0a624708c91581d685"
 "checksum gio 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)" = "7ac814c79b301903e2f43428d26497c5d58fc1f34f4376d6f8a12bb296612a47"
 "checksum gio-sys 0.3.1 (registry+https://github.com/rust-lang/crates.io-index)" = "1967f858f0e536ce876868583a3a8df1025832d76567897da7f8ad860851eff3"
 "checksum glib 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)" = "bf2e0735d142ea9c5f29b1df3cfe1f818be83acd5f639a4c5516c70807574b53"

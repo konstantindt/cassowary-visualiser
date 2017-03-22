@@ -9,6 +9,7 @@ keywords = ["visualiser", "cassowary", "solver", "layouts"]
 license = "MIT"
 
 [dependencies]
+getopts = "^0"
 gtk = "^0"
 gdk = "^0"
 cairo-rs = "^0"
