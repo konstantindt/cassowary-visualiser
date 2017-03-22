@@ -40,11 +40,11 @@ impl PenStream {
 
     pub fn add_rec_to_draw(&mut self, x: f64, y: f64, w: f64, h: f64) {
         self.recs_to_draw.push(Rectangle {
-            x_pos: x,
-            y_pos: y,
-            width: w,
-            height: h,
-        });
+                                   x_pos: x,
+                                   y_pos: y,
+                                   width: w,
+                                   height: h,
+                               });
     }
 }
 

@@ -38,23 +38,23 @@ impl Visualiser {
         self.drawing_area.add_events(4);
 
         let shared_marked_rec = self.shared_marked_rec.clone();
-        self.drawing_area
-            .connect_motion_notify_event(move |da: &DrawingArea, event: &EventMotion| {
-                let recs = recs_shared.lock().unwrap();
-                let mut marked_rec = shared_marked_rec.lock().unwrap();
+        self.drawing_area.connect_motion_notify_event(move |da: &DrawingArea,
+                                                            event: &EventMotion| {
+            let recs = recs_shared.lock().unwrap();
+            let mut marked_rec = shared_marked_rec.lock().unwrap();
 
-                let (mouse_x, mouse_y) = event.get_position();
-                if let Some(i) = recs.a_rec_surrounds(mouse_x, mouse_y) {
-                    if let None = *marked_rec {
-                        *marked_rec = Some(i);
-                        queue_draw_of(i, &recs, da);
-                    }
-                } else if let Some(i) = *marked_rec {
-                    *marked_rec = None;
+            let (mouse_x, mouse_y) = event.get_position();
+            if let Some(i) = recs.a_rec_surrounds(mouse_x, mouse_y) {
+                if let None = *marked_rec {
+                    *marked_rec = Some(i);
                     queue_draw_of(i, &recs, da);
                 }
-                Inhibit(false)
-            });
+            } else if let Some(i) = *marked_rec {
+                *marked_rec = None;
+                queue_draw_of(i, &recs, da);
+            }
+            Inhibit(false)
+        });
     }
 }
 
