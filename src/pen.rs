@@ -1,4 +1,5 @@
 use cairo::Context;
+use visualiser::DrawCommand;
 
 pub struct PenStream {
     recs_to_draw: Vec<Rectangle>,
@@ -23,19 +24,28 @@ impl PenStream {
         None
     }
 
-    pub fn draw_all_recs(&self, cr: &Context, marked_rec: &Option<usize>) {
-        if let Some(index) = *marked_rec {
-            let ref r = self.recs_to_draw[index];
-            cr.set_source_rgb(0.0, 0.0, 255.0);
-            cr.rectangle(r.x_pos, r.y_pos, r.width, r.height);
-            cr.stroke();
-            cr.set_source_rgb(0.0, 0.0, 0.0);
-        } else {
-            for r in self.recs_to_draw.iter() {
+    pub fn draw(&self, cr: &Context, dc: &DrawCommand) {
+        match dc {
+            &DrawCommand::Draw(shape_index) => {
+                let ref r = self.recs_to_draw[shape_index];
                 cr.rectangle(r.x_pos, r.y_pos, r.width, r.height);
+                cr.stroke();
+            }
+            &DrawCommand::Mark { shape_index, colour } => {
+                let ref r = self.recs_to_draw[shape_index];
+                cr.set_source_rgb(colour.0, colour.1, colour.2);
+                cr.rectangle(r.x_pos, r.y_pos, r.width, r.height);
+                cr.stroke();
+                // Return to default colour (Black).
+                cr.set_source_rgb(0.0, 0.0, 0.0);
+            }
+            &DrawCommand::DrawAll => {
+                for r in self.recs_to_draw.iter() {
+                    cr.rectangle(r.x_pos, r.y_pos, r.width, r.height);
+                }
+                cr.stroke();
             }
         }
-        cr.stroke();
     }
 
     pub fn add_rec_to_draw(&mut self, x: f64, y: f64, w: f64, h: f64) {
@@ -45,6 +55,10 @@ impl PenStream {
                                    width: w,
                                    height: h,
                                });
+    }
+
+    pub fn clear_all_recs(&mut self) {
+        self.recs_to_draw.clear();
     }
 }
 

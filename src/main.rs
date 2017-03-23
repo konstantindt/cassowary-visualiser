@@ -53,26 +53,25 @@ fn main() {
     match option_matches.free[0].as_str() {
         "demo1" => {
             let mut pen = shared_pen.lock().unwrap();
-            cassowary_calculations::cal_and_draw_demo1(visu.drawing_area().get_allocated_width() as
-                                                       f32,
-                                                       visu.drawing_area().get_allocated_height() as
-                                                       f32,
-                                                       pen.deref_mut());
+            cassowary_calculations::cal_demo1(visu.drawing_area().get_allocated_width() as f32,
+                                              visu.drawing_area().get_allocated_height() as f32,
+                                              pen.deref_mut());
         }
         "demo2" => {
             let mut pen = shared_pen.lock().unwrap();
-            cassowary_calculations::cal_and_draw_demo2(30.0,
-                                                       20.0,
-                                                       130.0,
-                                                       20.0,
-                                                       30.0,
-                                                       20.0,
-                                                       20.0,
-                                                       visu.drawing_area().get_allocated_width() as
-                                                       f32,
-                                                       visu.drawing_area().get_allocated_height() as
-                                                       f32,
-                                                       pen.deref_mut());
+            cassowary_calculations::cal_demo2(30.0,
+                                              20.0,
+                                              130.0,
+                                              20.0,
+                                              30.0,
+                                              20.0,
+                                              20.0,
+                                              visu.drawing_area().get_allocated_width() as f32,
+                                              visu.drawing_area().get_allocated_height() as f32,
+                                              pen.deref_mut());
+            // Key release mask (pressed)
+            window.add_events(2048);
+            visu.set_key_pressed_event(shared_pen.clone());
         }
         _ => panic!("Demo selection not recognised."),
     }
