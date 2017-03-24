@@ -73,6 +73,22 @@ fn main() {
             window.add_events(2048);
             visu.set_key_pressed_event(shared_pen.clone());
         }
+        "demo3" => {
+            let mut pen = shared_pen.lock().unwrap();
+            cassowary_calculations::cal_demo3(30.0,
+                                              20.0,
+                                              150.0,
+                                              20.0,
+                                              300.0,
+                                              20.0,
+                                              30.0,
+                                              20.0,
+                                              20.0,
+                                              visu.drawing_area().get_allocated_width() as f32,
+                                              visu.drawing_area().get_allocated_height() as f32,
+                                              pen.deref_mut());
+            visu.set_size_change_event(shared_pen.clone());
+        }
         _ => panic!("Demo selection not recognised."),
     }
 
