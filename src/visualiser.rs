@@ -1,11 +1,11 @@
 use std::ops::DerefMut;
 use std::sync::{Arc, Mutex, MutexGuard};
 use gtk::prelude::*;
-use gtk::DrawingArea;
+use gtk::{DrawingArea, Allocation};
 use gdk::{EventKey, EventMotion};
 use cairo::Context;
 use pen::PenStream;
-use cassowary_calculations::demo2_key_release;
+use cassowary_calculations::{demo2_key_release, demo3_size_change};
 
 pub struct Visualiser {
     drawing_area: DrawingArea,
@@ -66,6 +66,15 @@ impl Visualiser {
                 queue_draw_of(rec_index, &pen, da);
             }
             Inhibit(false)
+        });
+    }
+
+    pub fn set_size_change_event(&self, draw_with: Arc<Mutex<PenStream>>) {
+        let cs_handle = self.shared_command_stack.clone();
+        self.drawing_area.connect_size_allocate(move |da: &DrawingArea, _: &Allocation| {
+            let mut pen = draw_with.lock().unwrap();
+            let mut command_stack = cs_handle.lock().unwrap();
+            demo3_size_change(pen.deref_mut(), da, command_stack.deref_mut());
         });
     }
 
