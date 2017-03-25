@@ -26,8 +26,8 @@ pub fn cal_demo1(da_width: f32, da_height: f32, pen: &mut PenStream) {
     let mut objective_func = Function::new(exp1, ProblemType::MAX);
     let c1 = new_reg_con(exp2);
     let c2 = new_reg_con(exp3);
-    let subject_to = SystemOfConstraints::new(vec![c1, c2]);
-    let solution = cassowary::optimise(&mut objective_func, &subject_to);
+    let mut subject_to = SystemOfConstraints::new(vec![c1, c2]);
+    let solution = cassowary::optimise(&mut objective_func, &mut subject_to);
     let width = solution.iter()
         .find(|&entry| entry.0 == "width")
         .unwrap()
@@ -77,8 +77,8 @@ pub fn cal_demo2(x_loc1: f32,
     let c3 = new_reg_con(exp4);
     let c4 = new_reg_con(exp5);
     let c5 = new_reg_con(exp6);
-    let subject_to = SystemOfConstraints::new(vec![c1, c2, c3, c4, c5]);
-    let solution = cassowary::optimise(&mut objective_func, &subject_to);
+    let mut subject_to = SystemOfConstraints::new(vec![c1, c2, c3, c4, c5]);
+    let solution = cassowary::optimise(&mut objective_func, &mut subject_to);
     let width1 = solution.iter()
         .find(|&entry| entry.0 == "width1")
         .unwrap()
@@ -202,8 +202,8 @@ pub fn cal_demo3(x_loc1: f32,
     let c5 = new_reg_con(exp6);
     let c6 = new_reg_con(exp7);
     let c7 = new_reg_con(exp8);
-    let subject_to = SystemOfConstraints::new(vec![c1, c2, c3, c4, c5, c6, c7]);
-    let solution = cassowary::optimise(&mut objective_func, &subject_to);
+    let mut subject_to = SystemOfConstraints::new(vec![c1, c2, c3, c4, c5, c6, c7]);
+    let solution = cassowary::optimise(&mut objective_func, &mut subject_to);
     let width1 = solution.iter()
         .find(|&entry| entry.0 == "width1")
         .unwrap()
