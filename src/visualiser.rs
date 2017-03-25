@@ -2,7 +2,7 @@ use std::ops::DerefMut;
 use std::sync::{Arc, Mutex, MutexGuard};
 use gtk::prelude::*;
 use gtk::{DrawingArea, Allocation};
-use gdk::{EventKey, EventMotion};
+use gdk::{EventButton, EventKey, EventMotion};
 use cairo::Context;
 use pen::PenStream;
 use cassowary_calculations::{demo2_key_release, demo3_size_change};
@@ -11,6 +11,7 @@ pub struct Visualiser {
     drawing_area: DrawingArea,
     shared_command_stack: Arc<Mutex<Vec<DrawCommand>>>,
     shared_marked_rec: Arc<Mutex<Option<usize>>>,
+    shared_drag_start_pos: Arc<Mutex<Option<(i32, i32)>>>,
 }
 
 impl Visualiser {
@@ -20,6 +21,7 @@ impl Visualiser {
             shared_command_stack: Arc::new(Mutex::new(vec![DrawCommand::DrawAll,
                                                            DrawCommand::DrawAll])),
             shared_marked_rec: Arc::new(Mutex::new(None)),
+            shared_drag_start_pos: Arc::new(Mutex::new(None)),
         }
     }
 
@@ -75,6 +77,62 @@ impl Visualiser {
             let mut pen = draw_with.lock().unwrap();
             let mut command_stack = cs_handle.lock().unwrap();
             demo3_size_change(pen.deref_mut(), da, command_stack.deref_mut());
+        });
+    }
+
+    pub fn set_mouse_drag_event(&self, draw_with: Arc<Mutex<PenStream>>) {
+        self.set_mouse_pressed_event();
+        self.set_mouse_released_event(draw_with);
+    }
+
+    fn set_mouse_pressed_event(&self) {
+        // Button press mask.
+        self.drawing_area.add_events(256);
+
+        let drag_start_pos_handle = self.shared_drag_start_pos.clone();
+        self.drawing_area.connect_button_press_event(move |_: &DrawingArea, eb: &EventButton| {
+            let mut drag_start_pos = drag_start_pos_handle.lock().unwrap();
+
+            // On left press...
+            if eb.as_ref().button == 1 {
+                // ...store mouse position.
+                let current_pos = eb.get_position();
+                *drag_start_pos = Some((current_pos.0 as i32, current_pos.1 as i32));
+            }
+            Inhibit(false)
+        });
+    }
+
+    fn set_mouse_released_event(&self, draw_with: Arc<Mutex<PenStream>>) {
+        // Button press mask.
+        self.drawing_area.add_events(512);
+
+        let drag_start_pos_handle = self.shared_drag_start_pos.clone();
+        let cs_handle = self.shared_command_stack.clone();
+        self.drawing_area.connect_button_release_event(move |da: &DrawingArea,
+                                                             eb: &EventButton| {
+            let mut pen = draw_with.lock().unwrap();
+            let mut command_stack = cs_handle.lock().unwrap();
+            let drag_start_pos = drag_start_pos_handle.lock().unwrap();
+
+            // On left release...
+            if eb.as_ref().button == 1 {
+                // ...draw new rectangle.
+                let start_pos = drag_start_pos.expect("No speficied position found for where \
+                                                      mouse drag started.");
+                let current_pos = eb.get_position();
+                let end_pos = (current_pos.0 as i32, current_pos.1 as i32);
+                let width = end_pos.0 - start_pos.0;
+                let height = end_pos.1 - start_pos.1;
+                pen.add_rec_to_draw(start_pos.0 as f64,
+                                    start_pos.1 as f64,
+                                    width as f64,
+                                    height as f64);
+                let new_rec_index = pen.recs_len() - 1;
+                command_stack.push(DrawCommand::Draw(new_rec_index));
+                queue_draw_of(new_rec_index, &pen, da);
+            }
+            Inhibit(false)
         });
     }
 

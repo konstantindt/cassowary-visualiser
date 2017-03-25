@@ -89,6 +89,9 @@ fn main() {
                                               pen.deref_mut());
             visu.set_size_change_event(shared_pen.clone());
         }
+        "demo4" => {
+            visu.set_mouse_drag_event(shared_pen.clone());
+        }
         _ => panic!("Demo selection not recognised."),
     }
 

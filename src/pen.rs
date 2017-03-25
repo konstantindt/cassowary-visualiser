@@ -10,6 +10,10 @@ impl PenStream {
         PenStream { recs_to_draw: Vec::new() }
     }
 
+    pub fn recs_len(&self) -> usize {
+        self.recs_to_draw.len()
+    }
+
     pub fn rectangle_info(&self, for_rec: usize) -> (i32, i32, i32, i32) {
         let ref r = self.recs_to_draw[for_rec];
         (r.x_pos as i32, r.y_pos as i32, r.width as i32, r.height as i32)
