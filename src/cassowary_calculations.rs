@@ -171,11 +171,13 @@ pub fn cal_demo3(x_loc1: f32,
                                     new_var("height2", 1.0),
                                     new_var("width3", 1.0),
                                     new_var("height3", 1.0)]);
-    let exp2 = Expression::new(vec![new_var("width2", 1.0), new_var("width3", 1.0)],
+    let exp2 = Expression::new(vec![new_var("width1", 1.0),
+                                    new_var("width2", 1.0),
+                                    new_var("width3", 1.0)],
                                Relationship::LEQ,
                                vec![new_const("con1",
-                                              da_width - (2.0 * side_margin) - (2.0 * mid_margin) -
-                                              100.0)]);
+                                              da_width - (2.0 * side_margin) -
+                                              (2.0 * mid_margin))]);
     let exp3 = Expression::new(vec![new_var("height2", 1.0)],
                                Relationship::LEQ,
                                vec![new_const("con2", da_height - (2.0 * top_margin))]);
