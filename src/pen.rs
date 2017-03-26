@@ -66,6 +66,7 @@ impl PenStream {
     }
 }
 
+#[derive(Debug)]
 struct Rectangle {
     x_pos: f64,
     y_pos: f64,
