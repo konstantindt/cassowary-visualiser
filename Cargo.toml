@@ -3,7 +3,7 @@ name = "cassowary_visualiser"
 version = "0.1.0"
 authors = ["Konstantin Terziev <kd.terziev@gmail.com>"]
 description = "Express and test your graphical layout ideas using Cassowary."
-repository = "https://github.com/MrKonstantinT/cassowary-visualiser/"
+repository = "https://github.com/konstantindt/cassowary-visualiser/"
 readme = "README.md"
 keywords = ["visualiser", "cassowary", "solver", "layouts"]
 license = "MIT"
@@ -13,7 +13,7 @@ getopts = "^0"
 gtk = "^0"
 gdk = "^0"
 cairo-rs = "^0"
-cassowary = { git = "https://github.com/MrKonstantinT/rust-cassowary/" }
+cassowary = { git = "https://github.com/konstantindt/cassowary-visualiser/" }
 
 [features]
 gtk_3_6 = ["gtk/v3_6"]

@@ -3,7 +3,7 @@ name = "cassowary_visualiser"
 version = "0.1.0"
 dependencies = [
  "cairo-rs 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "cassowary 0.1.0 (git+https://github.com/MrKonstantinT/rust-cassowary/)",
+ "cassowary 0.1.0 (git+https://github.com/konstantindt/rust-cassowary/)",
  "gdk 0.5.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "getopts 0.2.14 (registry+https://github.com/rust-lang/crates.io-index)",
  "gtk 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -59,7 +59,7 @@ dependencies = [
 [[package]]
 name = "cassowary"
 version = "0.1.0"
-source = "git+https://github.com/MrKonstantinT/rust-cassowary/#e777e87e1202e3c0a660b2d001cb7d6235914d88"
+source = "git+https://github.com/konstantindt/rust-cassowary/#e777e87e1202e3c0a660b2d001cb7d6235914d88"
 
 [[package]]
 name = "gdk"
@@ -257,7 +257,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 "checksum c_vec 1.0.12 (registry+https://github.com/rust-lang/crates.io-index)" = "aa9e1d9f7d49e289f36f19effbf3d5a5e30163ecf9c7a3c9be94d5374dec5b9a"
 "checksum cairo-rs 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)" = "7897ceda29077c3d87f2d46a0f23ed6c552e48e8d1943ac755f8956f81a8a20d"
 "checksum cairo-sys-rs 0.3.1 (registry+https://github.com/rust-lang/crates.io-index)" = "e43dcd461d0b014b01443cbda24684e88060e462a757a732e30309bb5fa26c9e"
-"checksum cassowary 0.1.0 (git+https://github.com/MrKonstantinT/rust-cassowary/)" = "<none>"
+"checksum cassowary 0.1.0 (git+https://github.com/konstantindt/rust-cassowary/)" = "<none>"
 "checksum gdk 0.5.0 (registry+https://github.com/rust-lang/crates.io-index)" = "dbdd6a10d03581c2de537ad016f33522476091c05094ad9cf2e284985eb7d208"
 "checksum gdk-pixbuf 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)" = "5c4fd94e8cb37a8e25f84dd18b574a5d54823da3e8a9fe9b0adc154c77ca5c98"
 "checksum gdk-pixbuf-sys 0.3.1 (registry+https://github.com/rust-lang/crates.io-index)" = "4db256fec7cfbb3ec00e45096a67b676dc255d5cdeb10770b8f0137932ec0944"
